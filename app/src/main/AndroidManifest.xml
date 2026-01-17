@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LostAndFound">
         <activity
+            android:name=".AdminHome"
+            android:exported="false" />
+        <activity
             android:name=".loading_screen"
             android:exported="false" />
         <activity

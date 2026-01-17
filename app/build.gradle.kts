@@ -27,6 +27,12 @@ android {
             )
         }
     }
+
+    buildFeatures{
+        viewBinding = true
+    }
+
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
@@ -34,6 +40,7 @@ android {
 }
 
 dependencies {
+    implementation("np.com.susanthapa:curved_bottom_navigation:0.7.0")
     implementation("com.airbnb.android:lottie:6.4.0")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
