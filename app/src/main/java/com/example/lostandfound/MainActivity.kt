@@ -10,7 +10,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val intent = Intent(this, AdminHome::class.java)
+        val intent = Intent(this, Login::class.java)
         startActivity(intent)
 
         finish()

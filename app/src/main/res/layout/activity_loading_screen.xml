@@ -5,10 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:gravity="center"
-    android:clipChildren="false">
+    android:layout_height="match_parent">
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/waveAnim"
@@ -19,7 +16,7 @@
         app:lottie_autoPlay="false"
         app:lottie_rawRes="@raw/wave"
         app:lottie_loop="false"
-
+        android:elevation="20dp"
         />
 
 
