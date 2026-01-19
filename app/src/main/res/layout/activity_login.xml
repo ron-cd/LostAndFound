@@ -9,10 +9,11 @@
     android:background="@drawable/login_bg">
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/TV_Signup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="28dp"
+        android:clickable="true"
         android:fontFamily="@font/konkhmer"
         android:paddingBottom="10dp"
         android:text="Sign Up"
@@ -99,8 +100,8 @@
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="28dp"
-        android:fontFamily="@font/konkhmer"
+        android:layout_marginBottom="32dp"
+        android:fontFamily="sans-serif-medium"
         android:paddingBottom="10dp"
         android:text="Don't have an account?"
         android:textColor="@color/text_color"
