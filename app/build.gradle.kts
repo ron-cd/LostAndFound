@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -40,6 +41,9 @@ android {
 }
 
 dependencies {
+    implementation ("com.google.firebase:firebase-auth-ktx")
+    implementation ("com.google.firebase:firebase-firestore-ktx")
+    implementation (platform("com.google.firebase:firebase-bom:32.2.0"))
     implementation("np.com.susanthapa:curved_bottom_navigation:0.7.0")
     implementation("com.airbnb.android:lottie:6.4.0")
     implementation(libs.androidx.core.ktx)

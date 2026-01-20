@@ -26,7 +26,7 @@
             app:layout_constraintHorizontal_bias="0.097"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.63" />
+            app:layout_constraintVertical_bias="0.575" />
 
         <TextView
             android:id="@+id/textView"
@@ -42,7 +42,7 @@
             app:layout_constraintHorizontal_bias="0.106"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.537" />
+            app:layout_constraintVertical_bias="0.464" />
 
         <TextView
             android:id="@+id/textView4"
@@ -55,10 +55,10 @@
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.13"
+            app:layout_constraintHorizontal_bias="0.115"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.827" />
+            app:layout_constraintVertical_bias="0.795" />
 
         <TextView
             android:id="@+id/textView3"
@@ -71,10 +71,10 @@
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.097"
+            app:layout_constraintHorizontal_bias="0.094"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.727" />
+            app:layout_constraintVertical_bias="0.686" />
 
         <EditText
             android:id="@+id/ET_Password"
@@ -83,42 +83,20 @@
             android:background="@drawable/rounded_border"
             android:elevation="10dp"
             android:fontFamily="@font/konkhmer"
-            android:hint="23sdwins@#"
-            android:inputType="textEmailAddress"
+            android:hint="2342151245"
+            android:inputType="numberPassword"
             android:paddingStart="20dp"
-            android:paddingEnd="210dp"
+            android:paddingEnd="180dp"
             android:password="true"
             android:singleLine="true"
             android:textColor="@color/black"
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.388"
+            app:layout_constraintHorizontal_bias="0.266"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.771" />
-
-        <EditText
-            android:id="@+id/ET_Password2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/rounded_border"
-            android:elevation="10dp"
-            android:fontFamily="@font/konkhmer"
-            android:hint="23sdwins@#"
-            android:inputType="textPassword"
-            android:paddingStart="20dp"
-            android:paddingEnd="210dp"
-            android:password="true"
-            android:singleLine="true"
-            android:textColor="@color/black"
-            android:textSize="15sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.388"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.771" />
+            app:layout_constraintVertical_bias="0.739" />
 
         <EditText
             android:id="@+id/ET_Email"
@@ -140,7 +118,7 @@
             app:layout_constraintHorizontal_bias="0.409"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.678" />
+            app:layout_constraintVertical_bias="0.618" />
 
         <EditText
             android:id="@+id/ET_Username"
@@ -161,34 +139,35 @@
             app:layout_constraintHorizontal_bias="0.423"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.58" />
+            app:layout_constraintVertical_bias="0.515" />
 
         <EditText
-            android:id="@+id/ET_Username2"
+            android:id="@+id/ET_ConfirmPass"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/rounded_border"
             android:elevation="10dp"
             android:fontFamily="@font/konkhmer"
-            android:hint="Juan dela cruz"
-            android:inputType="textEmailAddress"
+            android:hint="312412131133"
+            android:inputType="numberPassword"
             android:paddingStart="20dp"
-            android:paddingEnd="200dp"
+            android:paddingEnd="175dp"
             android:password="true"
             android:singleLine="true"
             android:textColor="@color/black"
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.376"
+            app:layout_constraintHorizontal_bias="0.278"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.863" />
+            app:layout_constraintVertical_bias="0.85" />
 
         <Button
-            android:id="@+id/BTN_Login"
+            android:id="@+id/BTN_Signup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="36dp"
             android:backgroundTint="@color/text_color"
             android:elevation="10dp"
             android:fontFamily="@font/konkhmer"
@@ -201,7 +180,44 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ET_Username2" />
+            app:layout_constraintTop_toBottomOf="@+id/ET_ConfirmPass"
+            app:layout_constraintVertical_bias="0.761" />
+
+        <ImageView
+            android:id="@+id/IV_Back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.018"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.018"
+            app:srcCompat="@drawable/backbtn" />
+
+        <ImageView
+            android:id="@+id/IV_ShowPass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.267"
+            app:layout_constraintStart_toEndOf="@+id/ET_Password"
+            app:layout_constraintTop_toBottomOf="@+id/ET_Email"
+            app:layout_constraintVertical_bias="0.217"
+            app:srcCompat="@drawable/hide" />
+
+        <ImageView
+            android:id="@+id/IV_Confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.196"
+            app:layout_constraintStart_toEndOf="@+id/ET_ConfirmPass"
+            app:layout_constraintTop_toBottomOf="@+id/ET_Password"
+            app:layout_constraintVertical_bias="0.287"
+            app:srcCompat="@drawable/hide" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -22,20 +22,14 @@ class loading_screen : Fragment(R.layout.activity_loading_screen) {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.activity_loading_screen, container, false)
-
-        // Make sure the fragment covers the screen edge-to-edge
         requireActivity().window.decorView.systemUiVisibility =
             View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
 
         waveAnim = view.findViewById(R.id.waveAnim)
-
-        // Start wave covering animation when fragment is shown
         playCoverAnimation()
-
         return view
     }
 
-    /** Plays the "cover" animation when this fragment first appears */
     private fun playCoverAnimation() {
         waveAnim.apply {
             progress = 0f
@@ -44,28 +38,21 @@ class loading_screen : Fragment(R.layout.activity_loading_screen) {
         }
     }
 
-    /**
-     * Plays the reverse animation (uncover) with fade-out at the end,
-     * then calls onFinished() to let the activity/fragment transition.
-     */
     fun playReverseAnimation(onFinished: () -> Unit) {
         if (isAnimating || !this::waveAnim.isInitialized) return
         isAnimating = true
 
         waveAnim.removeAllAnimatorListeners()
-
-        // Ensure it starts from the end of the forward animation
         waveAnim.progress = 1f
-        waveAnim.speed = -6f
+        waveAnim.speed = -8f
         waveAnim.playAnimation()
 
         waveAnim.addAnimatorListener(object : Animator.AnimatorListener {
             override fun onAnimationEnd(animation: Animator) {
                 waveAnim.removeAllAnimatorListeners()
 
-                // Fade-out for smooth uncover
                 val fadeOut = ObjectAnimator.ofFloat(view, View.ALPHA, 1f, 0f)
-                fadeOut.duration = 400
+                fadeOut.duration = 200
                 fadeOut.start()
 
                 Handler(Looper.getMainLooper()).postDelayed({

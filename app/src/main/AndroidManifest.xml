@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LostAndFound">
         <activity
+            android:name=".MainHome"
+            android:exported="false" />
+        <activity
+            android:name=".SuccessScreen"
+            android:exported="false" />
+        <activity
             android:name=".Login"
             android:exported="false" />
         <activity
