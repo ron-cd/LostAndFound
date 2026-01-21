@@ -1,13 +1,13 @@
-package com.example.lostandfound
+package activities.lostandfound.login
 
-
+import activities.lostandfound.adminview.AdminHome
+import activities.lostandfound.studentview.MainHome
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
-import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
@@ -17,14 +17,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
-import com.example.lostandfound.databinding.ActivityAdminhomeBinding
+import activities.lostandfound.login.loading_screen
+import com.example.lostandfound.R
 import com.example.lostandfound.databinding.ActivityLoginBinding
-import com.example.lostandfoundsystem.Registration
-import com.example.lostandfoundsystem.loading_screen
+import activities.lostandfound.login.Registration
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.coroutines.time.delay
-import kotlin.math.log
 
 class Login : AppCompatActivity() {
 

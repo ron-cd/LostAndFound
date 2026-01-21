@@ -1,4 +1,4 @@
-package com.example.lostandfoundsystem
+package activities.lostandfound.login
 
 import android.animation.Animator
 import android.animation.ObjectAnimator
@@ -67,4 +67,3 @@ class loading_screen : Fragment(R.layout.activity_loading_screen) {
         })
     }
     }
-

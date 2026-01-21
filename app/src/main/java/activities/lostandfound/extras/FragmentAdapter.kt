@@ -1,4 +1,4 @@
-package com.example.lostandfoundsystem
+package com.example.lostandfoundsystem.extras
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

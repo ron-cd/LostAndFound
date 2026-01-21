@@ -12,16 +12,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LostAndFound">
         <activity
-            android:name=".MainHome"
+            android:name="activities.lostandfound.studentview.MainHome"
             android:exported="false" />
         <activity
-            android:name=".SuccessScreen"
+            android:name="activities.lostandfound.login.SuccessScreen"
             android:exported="false" />
         <activity
-            android:name=".Login"
+            android:name="activities.lostandfound.login.Login"
             android:exported="false" />
         <activity
-            android:name=".AdminHome"
+            android:name="activities.lostandfound.adminview.AdminHome"
             android:exported="false" />
         <activity
             android:name=".loading_screen"
