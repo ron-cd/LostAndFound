@@ -61,19 +61,21 @@ class Registration : Fragment() {
 
         // ✅ Find your back ImageView and make it go back to login
         val backButton = view.findViewById<ImageView>(R.id.IV_Back)
+        val signup = view.findViewById<Button>(R.id.BTN_Signup)
+        val emailET = view.findViewById<EditText>(R.id.ET_Email)
+        val passwordET = view.findViewById<EditText>(R.id.ET_Password)
+        val usernameET = view.findViewById<EditText>(R.id.ET_Username)
+        val confirmPasswordEditText = view.findViewById<EditText>(R.id.ET_ConfirmPass)
+        val toggleIconConfirm = view.findViewById<ImageView>(R.id.IV_Confirm)
+        val toggleIconPass = view.findViewById<ImageView>(R.id.IV_ShowPass)
+        val auth = FirebaseAuth.getInstance()
+        val firestore = FirebaseFirestore.getInstance()
+
         backButton.setOnClickListener {
             val intent = Intent(requireContext(), Login::class.java)
             startActivity(intent)
             requireActivity().finish()
         }
-
-        val signup = view.findViewById<Button>(R.id.BTN_Signup)
-        val emailET = view.findViewById<EditText>(R.id.ET_Email)
-        val passwordET = view.findViewById<EditText>(R.id.ET_Password)
-        val usernameET = view.findViewById<EditText>(R.id.ET_Username)
-
-        val auth = FirebaseAuth.getInstance()
-        val firestore = FirebaseFirestore.getInstance()
 
         signup.setOnClickListener {
             val email = emailET.text.toString().trim()
@@ -126,12 +128,7 @@ class Registration : Fragment() {
                 }
         }
 
-
-        val passwordEditText = view.findViewById<EditText>(R.id.ET_Password)
-        val confirmPasswordEditText = view.findViewById<EditText>(R.id.ET_ConfirmPass)
-        val toggleIconConfirm = view.findViewById<ImageView>(R.id.IV_Confirm)
-        val toggleIconPass = view.findViewById<ImageView>(R.id.IV_ShowPass)
-        setupPasswordToggle(passwordEditText, toggleIconPass)
+        setupPasswordToggle(passwordET, toggleIconPass)
         setupPasswordToggle(confirmPasswordEditText, toggleIconConfirm )
 
         return view

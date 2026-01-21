@@ -46,15 +46,15 @@
 
     <EditText
         android:id="@+id/ET_Password"
-        android:layout_width="wrap_content"
+        android:layout_marginEnd="100dp"
+        android:layout_marginStart="35dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_border"
         android:elevation="10dp"
         android:fontFamily="@font/konkhmer"
         android:hint="23sdwins@#"
         android:inputType="textEmailAddress"
-        android:paddingStart="20dp"
-        android:paddingEnd="210dp"
         android:password="true"
         android:singleLine="true"
         android:textColor="@color/black"
@@ -68,15 +68,15 @@
 
     <EditText
         android:id="@+id/ET_Username"
-        android:layout_width="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="50dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_border"
         android:elevation="10dp"
         android:fontFamily="@font/konkhmer"
         android:hint="Juan dela cruz"
         android:inputType="textEmailAddress"
-        android:paddingStart="20dp"
-        android:paddingEnd="200dp"
         android:singleLine="true"
         android:textColor="@color/black"
         android:textSize="15sp"
@@ -105,25 +105,26 @@
 
     <EditText
         android:id="@+id/ET_Email"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="50dp"
         android:background="@drawable/rounded_border"
         android:elevation="10dp"
         android:ellipsize="end"
         android:fontFamily="@font/konkhmer"
         android:hint="name@students.nu-clark.edu.ph"
         android:inputType="textEmailAddress"
-        android:paddingStart="20dp"
-        android:paddingEnd="60dp"
         android:singleLine="true"
         android:textColor="@color/black"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.397"
+        app:layout_constraintHorizontal_bias="0.40"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.652" />
+        app:layout_constraintVertical_bias="0.650
+" />
 
     <TextView
         android:id="@+id/textView2"
@@ -176,6 +177,18 @@
         app:layout_constraintTop_toBottomOf="@+id/ET_Password"
         app:layout_constraintVertical_bias="0.268" />
 
+    <ImageView
+        android:id="@+id/IV_ShowPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.132"
+        app:layout_constraintStart_toEndOf="@+id/ET_Password"
+        app:layout_constraintTop_toBottomOf="@+id/ET_Email"
+        app:layout_constraintVertical_bias="0.231"
+        app:srcCompat="@drawable/hide" />
+
     <FrameLayout
         android:id="@+id/FM_Container"
         android:layout_width="match_parent"
@@ -187,7 +200,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 

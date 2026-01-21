@@ -1,0 +1,24 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:enabled="true"
+        android:id="@+id/home"
+        android:icon="@drawable/view"
+        android:title="Home"
+        app:cnb_iconColor ="@color/yellow"
+        app:cnb_textColor ="@color/yellow"/>
+    <item
+        android:enabled="true"
+        android:id="@+id/redeem"
+        android:icon="@drawable/view"
+        android:title="Redeem"
+        app:cnb_iconColor ="@color/yellow"
+        app:cnb_textColor ="@color/yellow"/>
+    <item
+        android:enabled="true"
+        android:id="@+id/posts"
+        android:icon="@drawable/view"
+        android:title="Add Post"
+        app:cnb_iconColor ="@color/yellow"
+        app:cnb_textColor ="@color/yellow"/>
+</menu>

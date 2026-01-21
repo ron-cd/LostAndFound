@@ -7,13 +7,29 @@
     android:layout_height="match_parent"
     tools:context=".MainHome">
 
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
+    <com.ismaeldivita.chipnavigation.ChipNavigationBar
+        android:id="@+id/Menubar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="MAIN HOME"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:background="@drawable/rounded_border"
+        android:backgroundTint="@color/text_color"
+        android:elevation="5dp"
+        app:cnb_animationDuration="200"
+        app:cnb_menuResource="@menu/bottom_menu"
+        app:cnb_radius="20px"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.969" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

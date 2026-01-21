@@ -5,7 +5,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -24,7 +28,23 @@ import kotlin.math.log
 
 class Login : AppCompatActivity() {
 
-
+    private var isPasswordVisible = false
+    private fun setupPasswordToggle(editText: EditText, toggleIcon: ImageView) {
+        toggleIcon.setOnClickListener {
+            if (isPasswordVisible) {
+                // Hide password
+                editText.transformationMethod = PasswordTransformationMethod.getInstance()
+                toggleIcon.setImageResource(R.drawable.hide)
+            } else {
+                // Show password
+                editText.transformationMethod = HideReturnsTransformationMethod.getInstance()
+                toggleIcon.setImageResource(R.drawable.view)
+            }
+            isPasswordVisible = !isPasswordVisible
+            // Move cursor to end after toggle
+            editText.setSelection(editText.text.length)
+        }
+    }
 
     private lateinit var binding: ActivityLoginBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,11 +58,11 @@ class Login : AppCompatActivity() {
             insets
         }
 
-        val loginbutton = findViewById<Button>(R.id.BTN_Login)
         val emailet = findViewById<TextView>(R.id.ET_Email)
-        val usernameet = findViewById<TextView>(R.id.ET_Username)
-        val passwordet = findViewById<TextView>(R.id.ET_Password)
-        val confirmpass = findViewById<TextView>(R.id.ET_ConfirmPass)
+        val usernameet = findViewById<EditText>(R.id.ET_Username)
+        val passwordet = findViewById<EditText>(R.id.ET_Password)
+        val showicon = findViewById<ImageView>(R.id.IV_ShowPassword)
+
 
         binding.TVSignup.setOnClickListener {
             val loadingFragment = loading_screen()
@@ -73,17 +93,15 @@ class Login : AppCompatActivity() {
 
         binding.BTNLogin.setOnClickListener {
             val auth = FirebaseAuth.getInstance()
-            val firestore = FirebaseFirestore.getInstance()
             val email = emailet.text.toString().trim()
             val username = usernameet.text.toString().trim()
             val password = passwordet.text.toString().trim()
-            val confirmpass = confirmpass.text.toString().trim()
             val isAdmin =
                 username == "Admin" &&
                         email == "NUSdao@admin.nu-clark.edu.ph" &&
                         password == "NUCRK202"
 
-            if (email.isNotEmpty() && username.isNotEmpty() && password.isNotEmpty() && password == confirmpass ) {
+            if (email.isNotEmpty() && username.isNotEmpty() && password.isNotEmpty() ) {
                 if(isAdmin) {
 
                     val loadingFragment = loading_screen()
@@ -98,8 +116,7 @@ class Login : AppCompatActivity() {
                         finish()
                     }, 1600) // Adjust to match your Lottie animation length
                 }
-                if(!isAdmin){
-
+                else{
                     auth.signInWithEmailAndPassword(email, password)
                         .addOnSuccessListener {
                             val uid = FirebaseAuth.getInstance().currentUser!!.uid
@@ -117,6 +134,8 @@ class Login : AppCompatActivity() {
                                         FirebaseAuth.getInstance().signOut()
                                     } else {
 
+                                        Toast.makeText(this, "Logged in Successfully!", Toast.LENGTH_SHORT).show()
+
                                         val loadingFragment = loading_screen()
                                         supportFragmentManager.beginTransaction()
                                             .replace(R.id.FM_Container, loadingFragment, "loadingFragment")
@@ -131,13 +150,16 @@ class Login : AppCompatActivity() {
                                     }
                                 }
                         }
+                        .addOnFailureListener {
+                            Toast.makeText(this, "Incorrect email or password.", Toast.LENGTH_SHORT).show()
+                        }
                 }
             } else {
                 Toast.makeText(this, "Please fill in all fields.", Toast.LENGTH_SHORT).show()
             }
         }
 
-
+        setupPasswordToggle(passwordet, showicon)
 
     }
     private fun replaceFragment(fragment: Fragment) {
