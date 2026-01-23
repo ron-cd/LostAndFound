@@ -3,7 +3,7 @@
     <item
         android:enabled="true"
         android:id="@+id/home"
-        android:icon="@drawable/view"
+        android:icon="@drawable/home_icon"
         android:title="Home"
         app:cnb_iconColor ="@color/yellow"
         app:cnb_textColor ="@color/yellow"/>

@@ -1,12 +1,10 @@
 package activities.lostandfound.studentview
 
-import activities.lostandfound.login.Login
-import android.content.Intent
 import android.os.Bundle
-import android.widget.ImageView
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.addCallback
+import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.core.view.ViewCompat
@@ -26,6 +24,7 @@ import com.ismaeldivita.chipnavigation.ChipNavigationBar
 class MainHome : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var binding: ActivityMainHomeBinding
+    private lateinit var drawerLayout: DrawerLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,17 +32,14 @@ class MainHome : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
         enableEdgeToEdge()
         setContentView(binding.root)
 
-
-        // ✅ Custom ImageView menu button
-        val menuButton = findViewById<ImageView>(R.id.IV_Menu)
-        menuButton.setOnClickListener {
-            Toast.makeText(this, "placeholder (on the making)", Toast.LENGTH_SHORT).show()
-            val intent = Intent(this, Login::class.java)
-            startActivity(intent)
+        // Handle system bar padding
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
         }
 
-
-        // --- ViewPager + Bottom Nav setup ---
+        // --- Setup ViewPager + Bottom Navigation ---
         val fragments = listOf<Fragment>(
             HomeFragment(),
             RedeemFragment(),
@@ -74,6 +70,31 @@ class MainHome : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
                 R.id.posts -> binding.pager.currentItem = 2
             }
         }
+
+        // --- Setup Drawer Navigation ---
+        drawerLayout = binding.drawerLayout
+        val navigationView: NavigationView = binding.navView
+        navigationView.setNavigationItemSelectedListener(this)
+
+        onBackPressedDispatcher.addCallback(this) {
+            if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                drawerLayout.closeDrawer(GravityCompat.START)
+            } else {
+                // Finish the activity if drawer is closed
+                finish()
+            }
+        }
+
+        // Toolbar toggle (hamburger menu)
+        val toggle = ActionBarDrawerToggle(
+            this, drawerLayout, binding.toolbar,
+            R.string.open_nav, R.string.close_nav
+        )
+
+
+        drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
+
     }
 
     override fun onNavigationItemSelected(item: android.view.MenuItem): Boolean {
@@ -83,6 +104,11 @@ class MainHome : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
             R.id.nav_about -> Toast.makeText(this, "About clicked", Toast.LENGTH_SHORT).show()
             R.id.nav_logout -> Toast.makeText(this, "Logout clicked", Toast.LENGTH_SHORT).show()
         }
+
+        drawerLayout.closeDrawer(GravityCompat.START)
         return true
+
     }
+
+
 }

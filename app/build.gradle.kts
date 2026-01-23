@@ -41,6 +41,7 @@ android {
 }
 
 dependencies {
+    implementation("com.github.bumptech.glide:glide:5.0.5")
     implementation ("com.google.firebase:firebase-auth-ktx")
     implementation ("com.google.firebase:firebase-firestore-ktx")
     implementation (platform("com.google.firebase:firebase-bom:32.2.0"))
@@ -51,6 +52,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.recyclerview)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

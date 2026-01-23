@@ -1,33 +1,21 @@
 package com.example.lostandfound
 
+import activities.lostandfound.extras.Posts
+import activities.lostandfound.extras.RecyclerViewAdapter
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.firestore.FirebaseFirestore
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [HomeFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class HomeFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var postsRecyclerView : RecyclerView
+    private lateinit var postArrayList: ArrayList<Posts>
+    private lateinit var myAdapter: RecyclerViewAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,23 +25,43 @@ class HomeFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment HomeFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            HomeFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // 1. Initialize the RecyclerView
+        postsRecyclerView = view.findViewById(R.id.RV_LatestPosts)
+        postsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        postsRecyclerView.setHasFixedSize(true)
+
+        // 2. Setup the Data List and Adapter
+        postArrayList = arrayListOf<Posts>()
+        myAdapter = RecyclerViewAdapter(postArrayList)
+        postsRecyclerView.adapter = myAdapter
+
+        // 3. Fetch from Firestore
+        getPostData()
+    }
+
+    private fun getPostData() {
+        val db = FirebaseFirestore.getInstance()
+
+        // Replace "posts" with the exact name of your collection in Firebase
+        db.collection("posts").addSnapshotListener { snapshot, error ->
+            if (error != null) {
+                return@addSnapshotListener
             }
+
+            if (snapshot != null && !snapshot.isEmpty) {
+                postArrayList.clear()
+                for (document in snapshot.documents) {
+                    val post = document.toObject(Posts::class.java)
+                    if (post != null) {
+                        postArrayList.add(post)
+                    }
+                }
+                // Refresh the list on screen
+                myAdapter.notifyDataSetChanged()
+            }
+        }
     }
 }

@@ -101,6 +101,7 @@ class Login : AppCompatActivity() {
 
             if (email.isNotEmpty() && username.isNotEmpty() && password.isNotEmpty() ) {
                 if(isAdmin) {
+                    Toast.makeText(this, "Logged in Successfully!", Toast.LENGTH_SHORT).show()
 
                     val loadingFragment = loading_screen()
                     supportFragmentManager.beginTransaction()
@@ -113,6 +114,7 @@ class Login : AppCompatActivity() {
                         startActivity(intent)
                         finish()
                     }, 1600) // Adjust to match your Lottie animation length
+
                 }
                 else{
                     auth.signInWithEmailAndPassword(email, password)

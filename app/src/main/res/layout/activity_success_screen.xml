@@ -24,7 +24,7 @@
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/rounded_text_border"
+        android:background="@drawable/found_border"
         android:backgroundTint="@color/text_color"
         android:fontFamily="@font/konkhmer"
         android:paddingStart="50dp"
