@@ -41,6 +41,8 @@ android {
 }
 
 dependencies {
+    implementation("com.github.tapadoo:alerter:7.2.4")
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
     implementation("com.github.bumptech.glide:glide:5.0.5")
     implementation ("com.google.firebase:firebase-auth-ktx")
     implementation ("com.google.firebase:firebase-firestore-ktx")

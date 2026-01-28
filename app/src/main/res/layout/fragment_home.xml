@@ -14,15 +14,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="19dp"
+        android:layout_marginTop="5dp"
         android:fontFamily="@font/konkhmer"
         android:text="Latest posts"
         android:textColor="@color/text_color"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/RV_LatestPosts"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gridLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/gridLayout"
+        app:layout_constraintVertical_bias="0.024" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -40,21 +42,22 @@
             android:id="@+id/ET_Search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:layout_marginStart="40dp"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="40dp"
             android:background="@drawable/rounded_border"
+            android:drawableRight="@android:drawable/ic_menu_search"
             android:elevation="10dp"
             android:fontFamily="@font/konkhmer"
             android:hint="Search..."
             android:inputType="text"
-            android:textSize="19sp" />
+            android:textSize="18sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             android:fontFamily="@font/konkhmer"
             android:text="Categories"
             android:textColor="@color/text_color"
@@ -62,12 +65,13 @@
 
     </LinearLayout>
 
+
     <GridLayout
         android:id="@+id/gridLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="4dp"
+        android:layout_height="175dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="30dp"
         android:columnCount="3"
         app:layout_constraintEnd_toEndOf="parent"
@@ -75,116 +79,140 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
-        <com.google.android.material.card.MaterialCardView
+        <androidx.cardview.widget.CardView
+            android:id="@+id/CV_Electronics"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="8dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="10dp">
+
+            <ImageView
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@drawable/electronics_icon"
+                android:contentDescription="Electronics"/>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/CV_PersonalItems"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginStart="35dp"
             android:layout_marginTop="8dp"
-            app:cardElevation="5dp"
-            app:cardBackgroundColor="@color/white">
-
-            <ImageView
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:src="@drawable/electronics_icon" />
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="33dp"
-            android:layout_marginTop="8dp"
-            app:cardElevation="5dp"
-            app:cardBackgroundColor="@color/white">
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="10dp">
 
             <ImageView
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:src="@drawable/personal_icon" />
-        </com.google.android.material.card.MaterialCardView>
+        </androidx.cardview.widget.CardView>
 
-        <com.google.android.material.card.MaterialCardView
+        <androidx.cardview.widget.CardView
+            android:id="@+id/CV_Bags"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="10dp"
-            app:cardElevation="5dp"
-            app:cardBackgroundColor="@color/white">
+            android:layout_marginEnd="5dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="10dp">
 
             <ImageView
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:src="@drawable/bags_icon" />
-        </com.google.android.material.card.MaterialCardView>
+        </androidx.cardview.widget.CardView>
 
-        <com.google.android.material.card.MaterialCardView
+        <androidx.cardview.widget.CardView
+            android:id="@+id/CV_Wearables"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginStart="35dp"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="15dp"
-            app:cardElevation="5dp"
-            app:cardBackgroundColor="@color/white">
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="10dp">
 
             <ImageView
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:src="@drawable/wearables_icon" />
-        </com.google.android.material.card.MaterialCardView>
+        </androidx.cardview.widget.CardView>
 
-        <com.google.android.material.card.MaterialCardView
+        <androidx.cardview.widget.CardView
+            android:id="@+id/CV_Documents"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginStart="33dp"
+            android:layout_marginStart="35dp"
             android:layout_marginTop="15dp"
-            app:cardElevation="5dp"
-            app:cardBackgroundColor="@color/white">
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="10dp">
 
             <ImageView
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:src="@drawable/document_icon" />
-        </com.google.android.material.card.MaterialCardView>
+        </androidx.cardview.widget.CardView>
 
-        <com.google.android.material.card.MaterialCardView
+        <androidx.cardview.widget.CardView
+            android:id="@+id/CV_Others"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="15dp"
-            android:layout_marginEnd="15dp"
-            app:cardElevation="5dp"
-            app:cardBackgroundColor="@color/white">
+            android:layout_marginEnd="5dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="10dp">
 
             <ImageView
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:src="@drawable/others_icon" />
-        </com.google.android.material.card.MaterialCardView>
+                android:src="@drawable/others_icon"/>
+        </androidx.cardview.widget.CardView>
 
     </GridLayout>
-
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/RV_LatestPosts"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:clipToPadding="false"
-        android:paddingBottom="20dp"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6"
-        tools:listitem="@layout/lost_item_"/>
+        app:layout_constraintVertical_bias="0.0"
+        tools:listitem="@layout/lost_item_" />
 
-
-
-
+    <TextView
+        android:id="@+id/TV_EmptyState"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/konkhmer"
+        android:text="There are currently no lost items post"
+        android:textColor="#808080"
+        android:visibility="gone"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.707" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

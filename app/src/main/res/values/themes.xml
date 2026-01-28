@@ -10,6 +10,11 @@
         <item name="android:windowExitAnimation">@anim/slide_out</item>
     </style>
 
+    <style name="roundedCorners">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">20dp</item>
+    </style>
+
 
     <style name="Theme.LostAndFound" parent="Base.Theme.LostAndFound" />
 </resources>

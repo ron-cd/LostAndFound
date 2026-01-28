@@ -2,9 +2,12 @@ package activities.lostandfound.extras
 
 // Use Strings for URLs and IDs from Firestore
 data class Posts(
-    var photoIcon: String = "",
+    val id: String? = null,
+    val imageURL: String? = null,
     var itemName: String = "",
     var place: String = "",
-    var date: Any? = null,
-    var status: String = ""
+    var date: String = "",
+    var approved: Boolean = false,
+    var found : Boolean = false,
+    var notified : Boolean = false
 )

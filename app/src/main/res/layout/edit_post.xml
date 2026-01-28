@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:elevation="10dp"
+    android:padding="8dp">
+
+    <!-- Main Image -->
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/galleryImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/photo_placeholder"
+        android:elevation="5dp"
+        app:shapeAppearanceOverlay="@style/roundedCorners"/>
+
+    <!-- Edit Icon Overlay -->
+    <ImageView
+        android:id="@+id/edit_post"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="8dp"
+        android:src="@drawable/post_icon"
+        android:padding="6dp"
+        android:elevation="6dp"
+        android:contentDescription="Edit Post" />
+
+</FrameLayout>

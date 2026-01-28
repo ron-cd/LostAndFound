@@ -5,28 +5,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardElevation="8dp"
     app:cardCornerRadius="8dp"
-    android:layout_margin="16dp">
+    android:layout_margin="10dp">
     
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginVertical="6dp"
         android:orientation="horizontal">
 
         <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp">
 
             <ImageView
                 android:id="@+id/IV_photoicon"
                 android:layout_width="128dp"
                 android:layout_height="match_parent"
-                android:src="@drawable/bags_icon"/>
+                android:src="@drawable/photo_placeholder"/>
 
 
         </androidx.cardview.widget.CardView>
-        
+
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
@@ -36,18 +37,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
+                android:layout_marginTop="75dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/found_border"
                 android:fontFamily="@font/konkhmer"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
                 android:text="Found"
                 android:textColor="#51af51"
-                android:textSize="16sp"
-                android:layout_marginTop="75dp"
-                android:layout_marginEnd="15dp"
-                android:background="@drawable/found_border"
-                android:paddingStart="15dp"
-                android:paddingEnd="15dp"/>
+                android:textSize="16sp" />
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:orientation="vertical">
@@ -56,34 +57,38 @@
                     android:id="@+id/TV_Itemname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/konkhmer"
                     android:text="Item Name"
                     android:textColor="@color/text_color"
-                    android:textSize="23sp"
-                    android:fontFamily="@font/konkhmer"/>
+                    android:textSize="23sp" />
 
                 <TextView
                     android:id="@+id/TV_Place"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="-15dp"
+                    android:drawableLeft="@drawable/location_icon"
+                    android:fontFamily="@font/konkhmer"
                     android:text="Place"
-                    android:textColor="@color/yellow"
-                    android:textSize="17sp"
-                    android:fontFamily="@font/konkhmer"/>
+                    android:textColor="#D4D4D4"
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/TV_Date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="-11dp"
+                    android:drawableLeft="@drawable/date_icon"
+                    android:fontFamily="@font/konkhmer"
                     android:text="Date"
-                    android:textColor="@color/yellow"
-                    android:textSize="17sp"
-                    android:fontFamily="@font/konkhmer"/>
+                    android:textColor="#D4D4D4"
+                    android:textSize="15sp" />
 
             </LinearLayout>
 
 
         </RelativeLayout>
-        
+
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

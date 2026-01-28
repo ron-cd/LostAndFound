@@ -10,15 +10,15 @@
     <item
         android:enabled="true"
         android:id="@+id/redeem"
-        android:icon="@drawable/view"
+        android:icon="@drawable/paw_icon"
         android:title="Redeem"
         app:cnb_iconColor ="@color/yellow"
         app:cnb_textColor ="@color/yellow"/>
     <item
         android:enabled="true"
         android:id="@+id/posts"
-        android:icon="@drawable/view"
-        android:title="Add Post"
+        android:icon="@drawable/post_icon"
+        android:title="Manage Post"
         app:cnb_iconColor ="@color/yellow"
         app:cnb_textColor ="@color/yellow"/>
 </menu>

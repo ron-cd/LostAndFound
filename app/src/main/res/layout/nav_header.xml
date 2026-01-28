@@ -14,19 +14,21 @@
         android:src="@drawable/account_circle"/>
 
     <TextView
+        android:id="@+id/TV_Username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="JuanDC"
+        android:text="Username"
         android:textColor="@color/yellow"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
     <TextView
-        android:fontFamily="sans-serif-medium"
-        android:layout_marginBottom="16dp"
+        android:id="@+id/TV_Email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="delacruzat@students.nu-clark.edu.ph"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Email"
         android:textColor="@color/white"
-        android:textSize="14sp"/>
+        android:textSize="14sp" />
 
 </LinearLayout>

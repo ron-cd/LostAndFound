@@ -9,17 +9,17 @@
 
         <item
             android:id="@+id/nav_change_username"
-            android:icon="@drawable/view"
+            android:icon="@drawable/change_password_icon"
             android:title="Change Password"/>
 
         <item
             android:id="@+id/nav_change_password"
-            android:icon="@drawable/view"
+            android:icon="@drawable/change_username_icon"
             android:title="Change Username"/>
 
         <item
             android:id="@+id/nav_about"
-            android:icon="@drawable/view"
+            android:icon="@drawable/about_icon"
             android:title="About Us"/>
     </group>
 
@@ -59,7 +59,7 @@
         <menu>
             <item
                 android:id="@+id/nav_logout"
-                android:icon="@drawable/view"
+                android:icon="@drawable/logout_icon"
                 android:title="Logout"/>
         </menu>
 
