@@ -6,7 +6,7 @@
     android:id="@+id/FG_Posts"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PostFragment"
+    tools:context="activities.lostandfound.fragments.student.PostFragment"
     android:paddingTop="5dp">
 
 
@@ -43,7 +43,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        tools:listitem="@layout/edit_post">
+        tools:listitem="@layout/item_edit_post">
     </androidx.recyclerview.widget.RecyclerView>
 
 

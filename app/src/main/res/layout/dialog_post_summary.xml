@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/popupImage"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/photo_placeholder"/>
+
+        <TextView
+            android:fontFamily="@font/konkhmer"
+            android:textColor="@color/text_color"
+            android:id="@+id/popupTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Item Name"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginTop="12dp" />
+
+        <TextView
+            android:id="@+id/popupDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/date_icon"
+            android:fontFamily="@font/konkhmer"
+            android:text="Date"
+            android:textColor="#D4D4D4"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/popupLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/location_icon"
+            android:fontFamily="@font/konkhmer"
+            android:text="Place"
+            android:textColor="#D4D4D4"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/TV_found"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/konkhmer"
+            android:layout_marginTop="5dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:text="F"
+            android:textColor="#51af51"
+            android:background="@drawable/rounded_border"
+            android:backgroundTint="#82ED82"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:textStyle="bold"
+            android:fontFamily="@font/konkhmer"
+            android:id="@+id/btnSeeMore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="See more"
+            android:layout_gravity="end"
+            android:textColor="#D9BD55"
+            android:backgroundTint="#F8E396" />
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

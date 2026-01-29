@@ -1,6 +1,9 @@
 package activities.lostandfound.extras
 
-// Use Strings for URLs and IDs from Firestore
+/**
+ * Data model representing a Post item in the system.
+ * Designed for compatibility with Firebase Realtime Database or Firestore.
+ */
 data class Posts(
     val id: String? = null,
     val imageURL: String? = null,
@@ -8,6 +11,6 @@ data class Posts(
     var place: String = "",
     var date: String = "",
     var approved: Boolean = false,
-    var found : Boolean = false,
-    var notified : Boolean = false
+    var found: Boolean = false,
+    var notified: Boolean = false
 )

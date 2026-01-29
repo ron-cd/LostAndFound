@@ -3,7 +3,15 @@
     <style name="Base.Theme.LostAndFound" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+            <item name="drawerArrowStyle">@style/DrawerIcon</item>
     </style>
+
+
+    <style name="DrawerIcon"
+        parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="color">@color/white</item>
+    </style>
+
 
     <style name="DialogAnimation">
         <item name="android:windowEnterAnimation">@anim/slide_in</item>

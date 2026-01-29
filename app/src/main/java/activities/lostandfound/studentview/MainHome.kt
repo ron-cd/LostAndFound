@@ -12,24 +12,28 @@ import androidx.core.view.GravityCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import activities.lostandfound.fragments.student.EditPostFragment
 import activities.lostandfound.login.Login
 import android.content.Intent
 import android.widget.TextView
-import com.example.lostandfound.HomeFragment
-import com.example.lostandfound.PostFragment
+import activities.lostandfound.fragments.student.HomeFragment
+import activities.lostandfound.fragments.student.PostFragment
 import com.example.lostandfound.R
-import com.example.lostandfound.RedeemFragment
+import activities.lostandfound.fragments.student.RedeemFragment
 import com.example.lostandfound.databinding.ActivityMainHomeBinding
-import com.example.lostandfoundsystem.extras.FragmentAdapter
+import activities.lostandfound.extras.FragmentAdapter
+import android.view.View
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.ismaeldivita.chipnavigation.ChipNavigationBar
 import com.tapadoo.alerter.Alerter
 
+/**
+ * The primary container activity for the student view.
+ * Manages the Bottom Navigation (ViewPager2), Navigation Drawer, and Approval Notifications.
+ */
 class MainHome : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     lateinit var binding: ActivityMainHomeBinding
@@ -42,15 +46,35 @@ class MainHome : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
         enableEdgeToEdge()
         setContentView(binding.root)
 
-        // Handle system bar padding
+        setupWindowInsets()
+        setupViewPager()
+        setupDrawerNavigation()
+
+        // Listeners & Headers
+        updateNavHeader()
+        listenForApprovedPosts()
+    }
+
+    /**
+     * Handles system bar padding for an edge-to-edge experience.
+     */
+    private fun setupWindowInsets() {
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+
+            window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
+            actionBar?.hide()
+
             insets
         }
+    }
 
-        // --- Setup ViewPager + Bottom Navigation ---
-        val fragments = listOf<Fragment>(
+    /**
+     * Configures the ViewPager2 with fragments and synchronizes it with the ChipNavigationBar.
+     */
+    private fun setupViewPager() {
+        val fragments = listOf(
             HomeFragment(),
             RedeemFragment(),
             PostFragment(),
@@ -62,57 +86,59 @@ class MainHome : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
         val adapter = FragmentAdapter(fragments, supportFragmentManager, lifecycle)
         binding.pager.adapter = adapter
 
-        val botnavbar = findViewById<ChipNavigationBar>(R.id.Menubar)
-        botnavbar.setItemSelected(R.id.home, true)
+        val bottomNavBar = findViewById<ChipNavigationBar>(R.id.Menubar)
+        bottomNavBar.setItemSelected(R.id.home, true)
         binding.pager.currentItem = 0
 
-
+        // Handle page change synchronization and UI constraints
         binding.pager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
 
-                if(binding.pager.currentItem == 3){
+                // Redirect BlankFragment to PostFragment
+                if (binding.pager.currentItem == 3) {
                     binding.pager.currentItem = 2
                 }
 
-                if(binding.pager.currentItem == 2){
-                    binding.pager.isUserInputEnabled = true
+                // Enable/Disable swipe based on target fragment
+                binding.pager.isUserInputEnabled = when (binding.pager.currentItem) {
+                    4, 5 -> false // Disable swipe for New/Edit forms
+                    else -> true
                 }
 
-                if(binding.pager.currentItem == 4){
-                    binding.pager.isUserInputEnabled = false
-                    botnavbar.setItemSelected(R.id.posts, false)
+                // Unselect menu items if on form pages
+                if (binding.pager.currentItem == 4 || binding.pager.currentItem == 5) {
+                    bottomNavBar.setItemSelected(R.id.posts, false)
                 }
 
-                if(binding.pager.currentItem == 5){
-                    binding.pager.isUserInputEnabled = false
-                    botnavbar.setItemSelected(R.id.posts, false)
-                }
-
-
+                // Sync Bottom Bar
                 when (position) {
-                    0 -> botnavbar.setItemSelected(R.id.home, true)
-                    1 -> botnavbar.setItemSelected(R.id.redeem, true)
-                    2 -> botnavbar.setItemSelected(R.id.posts, true)
+                    0 -> bottomNavBar.setItemSelected(R.id.home, true)
+                    1 -> bottomNavBar.setItemSelected(R.id.redeem, true)
+                    2 -> bottomNavBar.setItemSelected(R.id.posts, true)
                 }
-
             }
         })
 
-        botnavbar.setOnItemSelectedListener { id ->
+        // Handle Bottom Bar Clicks
+        bottomNavBar.setOnItemSelectedListener { id ->
             when (id) {
                 R.id.home -> binding.pager.currentItem = 0
                 R.id.redeem -> binding.pager.currentItem = 1
                 R.id.posts -> binding.pager.currentItem = 2
             }
         }
+    }
 
-        // --- Setup Drawer Navigation ---
+    /**
+     * Sets up the Navigation Drawer and Toolbar toggle.
+     */
+    private fun setupDrawerNavigation() {
         drawerLayout = binding.drawerLayout
         val navigationView: NavigationView = binding.navView
         navigationView.setNavigationItemSelectedListener(this)
-        updateNavHeader()
 
+        // Custom back press handling
         onBackPressedDispatcher.addCallback(this) {
             if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
                 drawerLayout.closeDrawer(GravityCompat.START)
@@ -121,18 +147,18 @@ class MainHome : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
             }
         }
 
-        // Toolbar toggle (hamburger menu)
+        // Hamburger Menu Toggle
         val toggle = ActionBarDrawerToggle(
             this, drawerLayout, binding.toolbar,
             R.string.open_nav, R.string.close_nav
         )
-
-
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
-        listenForApprovedPosts()
-
+        val drawable = toggle.drawerArrowDrawable
+        drawable.barLength = 80f
+        drawable.barThickness = 8f
+        toggle.drawerArrowDrawable = drawable
     }
 
     override fun onNavigationItemSelected(item: android.view.MenuItem): Boolean {
@@ -140,21 +166,22 @@ class MainHome : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
             R.id.nav_change_password -> Toast.makeText(this, "Change Password clicked", Toast.LENGTH_SHORT).show()
             R.id.nav_change_username -> Toast.makeText(this, "Change Username clicked", Toast.LENGTH_SHORT).show()
             R.id.nav_about -> Toast.makeText(this, "About clicked", Toast.LENGTH_SHORT).show()
-            R.id.nav_logout -> FirebaseAuth.getInstance().signOut().also {
-                val intent = Intent(this, Login::class.java)
-                startActivity(intent)
-                Toast.makeText(this, "Logged Out", Toast.LENGTH_SHORT).show()
-                finish()
-            }
-
+            R.id.nav_logout -> handleLogout()
         }
-
         drawerLayout.closeDrawer(GravityCompat.START)
         return true
-
     }
 
+    private fun handleLogout() {
+        FirebaseAuth.getInstance().signOut()
+        startActivity(Intent(this, Login::class.java))
+        Toast.makeText(this, "Logged Out", Toast.LENGTH_SHORT).show()
+        finish()
+    }
 
+    /**
+     * Monitors Firestore for post approvals and triggers the Alerter notification.
+     */
     private fun listenForApprovedPosts() {
         val db = FirebaseFirestore.getInstance()
         val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
@@ -168,7 +195,6 @@ class MainHome : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
 
                 if (snapshots != null && !snapshots.isEmpty) {
                     for (docChange in snapshots.documentChanges) {
-                        // Only trigger for new matches (Added) or when a post becomes approved (Modified)
                         if (docChange.type == com.google.firebase.firestore.DocumentChange.Type.ADDED ||
                             docChange.type == com.google.firebase.firestore.DocumentChange.Type.MODIFIED) {
 
@@ -176,19 +202,7 @@ class MainHome : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
                             val postTitle = doc.getString("itemName") ?: "Post"
                             val postId = doc.id
 
-                            // Show the Alerter
-                            Alerter.create(this)
-                                .setTitle("Approval Notification")
-                                .setText("Your post '$postTitle' has been approved!")
-                                .setIcon(com.tapadoo.alerter.R.drawable.alerter_ic_notifications)
-                                .setBackgroundColorRes(R.color.text_color)
-                                .setDuration(4000)
-                                .enableSwipeToDismiss()
-                                .setOnClickListener {
-                                    binding.pager.currentItem = 2
-                                }
-                                .show()
-
+                            showApprovalAlert(postTitle)
                             markPostAsNotified(postId)
                         }
                     }
@@ -196,48 +210,46 @@ class MainHome : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
             }
     }
 
+    private fun showApprovalAlert(postTitle: String) {
+        Alerter.create(this)
+            .setTitle("Approval Notification")
+            .setText("Your post '$postTitle' has been approved!")
+            .setIcon(com.tapadoo.alerter.R.drawable.alerter_ic_notifications)
+            .setBackgroundColorRes(R.color.text_color)
+            .setDuration(4000)
+            .enableSwipeToDismiss()
+            .setOnClickListener {
+                binding.pager.currentItem = 2
+            }
+            .show()
+    }
 
-
+    /**
+     * Fetches the current user profile data for the Navigation Header.
+     */
     private fun updateNavHeader() {
-        val navigationView: NavigationView = binding.navView
-        // Access the header layout (usually at index 0)
-        val headerView = navigationView.getHeaderView(0)
-
-        // Find the TextViews inside that headerView
+        val headerView = binding.navView.getHeaderView(0)
         val tvUsername = headerView.findViewById<TextView>(R.id.TV_Username)
         val tvEmail = headerView.findViewById<TextView>(R.id.TV_Email)
 
-        val userId = FirebaseAuth.getInstance().currentUser?.uid
-
-        if (userId != null) {
-            val db = FirebaseFirestore.getInstance()
-
-            // Replace "Users" with your actual Firestore collection name
-            db.collection("users").document(userId).get()
-                .addOnSuccessListener { document ->
-                    if (document != null && document.exists()) {
-                        val username = document.getString("username") // replace with your field key
-                        val email = document.getString("email")       // replace with your field key
-
-                        tvUsername.text = username ?: "No Username"
-                        tvEmail.text = email ?: "No Email"
-                    }
-                }
-                .addOnFailureListener { e ->
-                    Toast.makeText(this, "Error fetching data: ${e.message}", Toast.LENGTH_SHORT).show()
-                }
-        }
-    }
-
-    private fun markPostAsNotified(postId: String) {
+        val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
         val db = FirebaseFirestore.getInstance()
-        db.collection("posts").document(postId)
-            .update("notified", true)
-            .addOnFailureListener {
+
+        db.collection("users").document(userId).get()
+            .addOnSuccessListener { document ->
+                if (document != null && document.exists()) {
+                    tvUsername.text = document.getString("username") ?: "No Username"
+                    tvEmail.text = document.getString("email") ?: "No Email"
+                }
+            }
+            .addOnFailureListener { _ ->
+                Toast.makeText(this, "Error fetching user data", Toast.LENGTH_SHORT).show()
             }
     }
 
-
-
-
+    private fun markPostAsNotified(postId: String) {
+        FirebaseFirestore.getInstance().collection("posts")
+            .document(postId)
+            .update("notified", true)
+    }
 }
