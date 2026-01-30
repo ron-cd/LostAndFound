@@ -8,12 +8,12 @@
         android:checkableBehavior="single">
 
         <item
-            android:id="@+id/nav_change_username"
+            android:id="@+id/nav_change_password"
             android:icon="@drawable/change_password_icon"
             android:title="Change Password"/>
 
         <item
-            android:id="@+id/nav_change_password"
+            android:id="@+id/nav_change_username"
             android:icon="@drawable/change_username_icon"
             android:title="Change Username"/>
 

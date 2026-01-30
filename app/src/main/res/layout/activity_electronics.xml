@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    android:background="#3F4A88"
+    android:background="#FBFBFB"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="false"
@@ -44,25 +44,20 @@
 
     <TextView
         android:id="@+id/textView15"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="90dp"
-        android:layout_marginTop="-30dp"
-        android:layout_marginEnd="90dp"
-        android:layout_marginBottom="12dp"
-        android:background="@drawable/border"
         android:fontFamily="@font/konkhmer"
         android:gravity="center"
-        android:paddingTop="50dp"
         android:text="Electronics"
-        android:textColor="@color/white"
-        android:textSize="24sp"
+        android:textColor="#FED773"
+        android:textSize="30sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.466" />
+        app:layout_constraintVertical_bias="0.675" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -118,6 +113,21 @@
 
 
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="130dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="-37dp"
+        android:background="@drawable/border"
+        android:paddingStart="47dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toStartOf="@+id/textView15"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.551"
+        app:srcCompat="@drawable/electronics_icon_filter" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

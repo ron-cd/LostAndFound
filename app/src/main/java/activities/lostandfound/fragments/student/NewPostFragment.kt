@@ -210,7 +210,7 @@ class NewPostFragment : Fragment() {
             .add(postData)
             .addOnSuccessListener {
                 dialog.dismiss()
-                Toast.makeText(requireContext(), "Post Published!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Post Published!\nWait for approval.", Toast.LENGTH_SHORT).show()
 
                 // Redirect to tab index 2
                 (activity as? MainHome)?.binding?.pager?.currentItem = 2

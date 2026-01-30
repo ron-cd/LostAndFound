@@ -121,7 +121,7 @@ class EditPostFragment : Fragment() {
         db.collection("posts").document(docId)
             .update(updatedData)
             .addOnSuccessListener {
-                Toast.makeText(context, "Post updated successfully", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Post updated successfully, please wait again for approval", Toast.LENGTH_SHORT).show()
                 (activity as? MainHome)?.binding?.pager?.setCurrentItem(2, true)
             }
             .addOnFailureListener { e ->

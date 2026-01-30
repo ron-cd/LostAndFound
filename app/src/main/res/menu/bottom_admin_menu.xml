@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:enabled="true"
+        android:id="@+id/home"
+        android:icon="@drawable/manage_acc_icon"
+        android:title="Manage Accounts"
+        app:cnb_iconColor ="@color/yellow"
+        app:cnb_textColor ="@color/yellow"/>
+    <item
+        android:enabled="true"
+        android:id="@+id/redeem"
+        android:icon="@drawable/post_icon"
+        android:title="Manage Posts"
+        app:cnb_iconColor ="@color/yellow"
+        app:cnb_textColor ="@color/yellow"/>
+
+</menu>

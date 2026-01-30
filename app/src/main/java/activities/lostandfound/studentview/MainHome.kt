@@ -23,7 +23,10 @@ import com.example.lostandfound.R
 import activities.lostandfound.fragments.student.RedeemFragment
 import com.example.lostandfound.databinding.ActivityMainHomeBinding
 import activities.lostandfound.extras.FragmentAdapter
+import android.app.AlertDialog
 import android.view.View
+import android.widget.EditText
+import androidx.core.content.ContentProviderCompat.requireContext
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -163,9 +166,14 @@ class MainHome : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
 
     override fun onNavigationItemSelected(item: android.view.MenuItem): Boolean {
         when (item.itemId) {
-            R.id.nav_change_password -> Toast.makeText(this, "Change Password clicked", Toast.LENGTH_SHORT).show()
-            R.id.nav_change_username -> Toast.makeText(this, "Change Username clicked", Toast.LENGTH_SHORT).show()
-            R.id.nav_about -> Toast.makeText(this, "About clicked", Toast.LENGTH_SHORT).show()
+            R.id.nav_change_password -> handleChangePassword()
+            R.id.nav_change_username -> showChangeUsernameDialog()
+            R.id.nav_about -> AlertDialog.Builder(this)
+                    .setTitle("About Us")
+                    .setMessage("Lost & Found App v1.0\nCreated for NU Clark Students.\n\nContact: delacruzat@students.nu-clark.edu.ph")
+                    .setPositiveButton("Close", null)
+                    .show()
+
             R.id.nav_logout -> handleLogout()
         }
         drawerLayout.closeDrawer(GravityCompat.START)
@@ -177,6 +185,16 @@ class MainHome : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
         startActivity(Intent(this, Login::class.java))
         Toast.makeText(this, "Logged Out", Toast.LENGTH_SHORT).show()
         finish()
+    }
+
+    private fun handleChangePassword(){
+        val email = FirebaseAuth.getInstance().currentUser?.email
+        if (email != null) {
+            FirebaseAuth.getInstance().sendPasswordResetEmail(email)
+                .addOnSuccessListener {
+                    Toast.makeText(this, "Reset link sent to $email", Toast.LENGTH_SHORT).show()
+                }
+        }
     }
 
     /**
@@ -210,6 +228,29 @@ class MainHome : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
             }
     }
 
+    private fun showChangeUsernameDialog() {
+        val editText = EditText(this)
+        AlertDialog.Builder(this)
+            .setTitle("Change Username")
+            .setView(editText)
+            .setPositiveButton("Update") { _, _ ->
+                val newName = editText.text.toString()
+                val userId = FirebaseAuth.getInstance().currentUser?.uid
+
+                if (userId != null && newName.isNotEmpty()) {
+                    FirebaseFirestore.getInstance().collection("users")
+                        .document(userId)
+                        .update("username", newName) // Update the specific field
+                        .addOnSuccessListener {
+                            Toast.makeText(this, "Username updated!", Toast.LENGTH_SHORT).show()
+                        }
+                }
+            }
+            .setNegativeButton("Cancel", null)
+            .show()
+    }
+
+
     private fun showApprovalAlert(postTitle: String) {
         Alerter.create(this)
             .setTitle("Approval Notification")
@@ -235,15 +276,19 @@ class MainHome : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
         val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
         val db = FirebaseFirestore.getInstance()
 
-        db.collection("users").document(userId).get()
-            .addOnSuccessListener { document ->
+        // Use addSnapshotListener instead of .get() for real-time updates
+        db.collection("users").document(userId)
+            .addSnapshotListener { document, error ->
+                if (error != null) {
+                    // Handle the error silently or log it
+                    return@addSnapshotListener
+                }
+
                 if (document != null && document.exists()) {
+                    // The UI will now change automatically as soon as the database changes
                     tvUsername.text = document.getString("username") ?: "No Username"
                     tvEmail.text = document.getString("email") ?: "No Email"
                 }
-            }
-            .addOnFailureListener { _ ->
-                Toast.makeText(this, "Error fetching user data", Toast.LENGTH_SHORT).show()
             }
     }
 
