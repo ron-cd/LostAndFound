@@ -26,7 +26,6 @@ import activities.lostandfound.extras.FragmentAdapter
 import android.app.AlertDialog
 import android.view.View
 import android.widget.EditText
-import androidx.core.content.ContentProviderCompat.requireContext
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore

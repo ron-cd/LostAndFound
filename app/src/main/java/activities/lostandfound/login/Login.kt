@@ -126,26 +126,26 @@ class Login : AppCompatActivity() {
      */
     private fun handleLogin(emailEt: TextView, usernameEt: EditText, passwordEt: EditText) {
         val auth = FirebaseAuth.getInstance()
+
+        FirebaseAuth.getInstance().signOut()
+
         val email = emailEt.text.toString().trim()
-        val username = usernameEt.text.toString().trim()
         val password = passwordEt.text.toString().trim()
 
-        val isAdmin = username == "Admin" &&
-                email == "NUSdao@admin.nu-clark.edu.ph" &&
-                password == "NUCRK202"
-
-        if (email.isNotEmpty() && username.isNotEmpty() && password.isNotEmpty()) {
-            if (isAdmin) {
-                navigateToHome(AdminHome::class.java)
-            } else {
-                auth.signInWithEmailAndPassword(email, password)
-                    .addOnSuccessListener {
+        if (email.isNotEmpty() && password.isNotEmpty()) {
+            // Always sign in to Firebase so you have a valid 'request.auth'
+            auth.signInWithEmailAndPassword(email, password)
+                .addOnSuccessListener {
+                    // Now check if this authenticated user is the Admin
+                    if (email == "NUSdao@admin.nu-clark.edu.ph") {
+                        navigateToHome(AdminHome::class.java)
+                    } else {
                         checkUserApproval()
                     }
-                    .addOnFailureListener {
-                        Toast.makeText(this, "Incorrect email or password.", Toast.LENGTH_SHORT).show()
-                    }
-            }
+                }
+                .addOnFailureListener {
+                    Toast.makeText(this, "Incorrect email or password.", Toast.LENGTH_SHORT).show()
+                }
         } else {
             Toast.makeText(this, "Please fill in all fields.", Toast.LENGTH_SHORT).show()
         }

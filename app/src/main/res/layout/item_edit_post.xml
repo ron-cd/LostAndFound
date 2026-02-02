@@ -17,6 +17,17 @@
         app:shapeAppearanceOverlay="@style/roundedCorners"/>
 
     <!-- Edit Icon Overlay -->
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/TV_Item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/konkhmer"
+        android:includeFontPadding="false"
+        android:text="Item Name"
+        android:textColor="@color/text_color"
+        android:textSize="23sp" />
+
     <ImageView
         android:id="@+id/edit_post"
         android:layout_width="36dp"
