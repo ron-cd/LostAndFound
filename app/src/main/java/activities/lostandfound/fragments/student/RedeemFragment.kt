@@ -83,7 +83,7 @@ class RedeemFragment : Fragment() {
                         TVPlaceholder.visibility = View.GONE
                         TVItemName.visibility = View.VISIBLE
                         IVItemImage.visibility = View.VISIBLE
-                        TVStatus.visibility = View.VISIBLE
+                        TVStatus.visibility = View.GONE
                         TVDateLabel.visibility = View.VISIBLE
                         TVDate.visibility = View.VISIBLE
                         TVCategoryLabel.visibility = View.VISIBLE
@@ -101,12 +101,11 @@ class RedeemFragment : Fragment() {
                         TVDescription.text = doc.getString("description")
                     }
 
-                    val isFound = doc.getBoolean("found") ?: false
-                    if (isFound) {
-                        binding.TVStatus.text = "Found"
-                        binding.TVStatus.setTextColor(resources.getColor(R.color.green, null))
-                        binding.TVStatus.setOnClickListener(null) // Safety: Clear listener
+                    val isFound = doc.getBoolean("found") ?: true
+                    if (!isFound) {
+                        binding.TVStatus.visibility = View.GONE
                     } else {
+                        binding.TVStatus.visibility = View.VISIBLE
                         binding.TVStatus.text = "Request"
                         binding.TVStatus.setTextColor(resources.getColor(R.color.green, null))
 
@@ -211,12 +210,14 @@ class RedeemFragment : Fragment() {
 
     private fun saveRedeemToFirestore(proofUrl: String, post: Posts, progressDialog: AlertDialog) {
         val user = auth.currentUser ?: return
+        val postId = currentDocId ?: ""
 
         val redeemData = hashMapOf(
             "claimerUid" to user.uid,
             "claimerEmail" to (user.email ?: "No Email"),
             "itemName" to post.itemName,
             "proofImageURL" to proofUrl,
+            "postId" to postId,
             "originalItemURL" to post.imageURL,
             "status" to "pending",
             "timestamp" to com.google.firebase.Timestamp.now()

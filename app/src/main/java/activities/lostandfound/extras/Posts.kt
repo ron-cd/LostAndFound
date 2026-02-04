@@ -1,10 +1,13 @@
 package activities.lostandfound.extras
 
+
 /**
  * Data model representing a Post item in the system.
  * Designed for compatibility with Firebase Realtime Database or Firestore.
  */
 data class Posts(
+    var documentId: String? = null,
+    val description: String? = null,
     val id: String? = null,
     val imageURL: String? = null,
     var itemName: String = "",

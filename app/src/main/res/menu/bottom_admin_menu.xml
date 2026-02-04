@@ -12,7 +12,7 @@
         android:enabled="true"
         android:id="@+id/approve_acccunts"
         android:icon="@drawable/approve_account_icon"
-        android:title="Approve Account"
+        android:title="Approval"
         app:cnb_iconColor ="@color/yellow"
         app:cnb_textColor ="@color/yellow"/>
 
