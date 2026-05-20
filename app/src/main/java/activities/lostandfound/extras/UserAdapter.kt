@@ -16,7 +16,6 @@ class UserAdapter(
     class UserViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val tvUsername: TextView = view.findViewById(R.id.TV_Username)
         val tvEmail: TextView = view.findViewById(R.id.TV_Email)
-        val tvPassword: TextView? = view.findViewById(R.id.TV_Password)
         val btnApprove: View? = view.findViewById(R.id.BTN_Approve)
         val btnReject: View? = view.findViewById(R.id.BTN_Reject)
     }
@@ -31,7 +30,6 @@ class UserAdapter(
         holder.tvUsername.text = user.username
         holder.tvEmail.text = user.email
 
-        holder.tvPassword?.text = user.password
 
         if (user.approved) {
             holder.btnApprove?.visibility = View.GONE

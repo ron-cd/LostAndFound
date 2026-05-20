@@ -161,7 +161,6 @@ class Registration : Fragment() {
                         "username" to username,
                         "email" to email,
                         "role" to "student",
-                        "password" to password,
                         "approved" to false,
                         "createdAt" to FieldValue.serverTimestamp()
                     )
