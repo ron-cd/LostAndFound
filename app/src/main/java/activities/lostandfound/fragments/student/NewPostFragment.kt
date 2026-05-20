@@ -132,10 +132,16 @@ class NewPostFragment : Fragment() {
             .create()
         dialog.show()
 
+        if (com.example.lostandfound.BuildConfig.IMGBB_API_KEY.isBlank()) {
+            dialog.dismiss()
+            Toast.makeText(requireContext(), "Image upload is not configured.", Toast.LENGTH_SHORT).show()
+            return
+        }
+
         val file = uriToFile(fileUri)
         val requestBody = MultipartBody.Builder()
             .setType(MultipartBody.FORM)
-            .addFormDataPart("key", "0ce4803b31e244218a3c5d525197ecc9")
+            .addFormDataPart("key", com.example.lostandfound.BuildConfig.IMGBB_API_KEY)
             .addFormDataPart("image", file.name, file.asRequestBody("image/*".toMediaTypeOrNull()))
             .build()
 

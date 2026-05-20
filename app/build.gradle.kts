@@ -17,6 +17,9 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        val imgBbApiKey = project.findProperty("IMGBB_API_KEY") as String? ?: ""
+        buildConfigField("String", "IMGBB_API_KEY", "\"${imgBbApiKey}\"")
     }
 
     buildTypes {
@@ -31,6 +34,7 @@ android {
 
     buildFeatures{
         viewBinding = true
+        buildConfig = true
     }
 
 
